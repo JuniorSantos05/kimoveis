@@ -4,21 +4,21 @@ import { AppDataSource } from "../data-source";
 import { User } from "../entities";
 import { AppError } from "../error/error";
 
-export const ensureEmailExistsMiddleware = async (
+export const ensureUserExistsMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const findUserEmail = await userRepository.find({
+  const findUser = await userRepository.findOne({
     where: {
-      email: req.body.email,
+      id: parseInt(req.params.id),
     },
   });
 
-  if (findUserEmail.length > 0) {
-    throw new AppError("Email already exists", 409);
+  if (!findUser) {
+    throw new AppError("User not found", 404);
   }
 
   return next();

@@ -21,10 +21,7 @@ export const ensureTokenIsValidMiddleware = (
       throw new AppError(error.message, 401);
     }
 
-    req.user = {
-      id: Number(decoded.sub),
-      admin: decoded.admin,
-    };
+    req.user = { id: parseInt(decoded.sub), admin: decoded.admin };
 
     return next();
   });

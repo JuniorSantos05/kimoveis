@@ -14,6 +14,8 @@ export const userSchema = z.object({
     }),
 });
 
+export const userUpdateSchema = userSchema.partial();
+
 export const returnUserSchema = userSchema
   .extend({
     id: z.number(),
