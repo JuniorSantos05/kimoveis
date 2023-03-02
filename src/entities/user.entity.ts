@@ -1,4 +1,7 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -32,4 +35,13 @@ export class User {
 
   @DeleteDateColumn({ type: "timestamp" })
   deletedAt: string | Date;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const isEncrypted = getRounds(this.password);
+    if (!isEncrypted) {
+      this.password = hashSync(this.password, 10);
+    }
+  }
 }
