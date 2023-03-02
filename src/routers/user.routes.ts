@@ -1,14 +1,17 @@
 import { Router } from "express";
+import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
+import { ensureEmailExistsMiddleware } from "../middlewares/ensureEmailExists.middleware";
+import { ensureIsAdminMiddleware } from "../middlewares/ensureIsAdmin.middleware ";
+import { ensureTokenIsValidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
+import { ensureUpdateUserIsAdmin } from "../middlewares/ensureUpdateUserIsAdmin.middleware";
+import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
+import { userSchema, updateUserSchema } from "../schemas/users.schemas";
 import {
   createUserController,
+  deleteUserController,
   listUserController,
   updateUserController,
 } from "../controllers/users.controllers";
-import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
-import { ensureEmailExistsMiddleware } from "../middlewares/ensureEmailExists.middleware";
-import { ensureTokenIsValidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
-import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
-import { userSchema, userUpdateSchema } from "../schemas/users.schemas";
 
 export const userRoutes: Router = Router();
 
@@ -19,12 +22,27 @@ userRoutes.post(
   createUserController
 );
 
-userRoutes.get("", listUserController); //FALTA VERIFICAÇÃO
+userRoutes.get(
+  "",
+  ensureTokenIsValidMiddleware,
+  ensureIsAdminMiddleware,
+  listUserController
+);
 
 userRoutes.patch(
   "/:id",
   ensureUserExistsMiddleware,
-  ensureDataIsValidMiddleware(userUpdateSchema),
+  ensureDataIsValidMiddleware(updateUserSchema),
+  ensureEmailExistsMiddleware,
   ensureTokenIsValidMiddleware,
+  ensureUpdateUserIsAdmin,
   updateUserController
+);
+
+userRoutes.delete(
+  "/:id",
+  ensureUserExistsMiddleware,
+  ensureTokenIsValidMiddleware,
+  ensureIsAdminMiddleware,
+  deleteUserController
 );

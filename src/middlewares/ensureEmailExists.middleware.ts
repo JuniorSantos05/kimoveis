@@ -11,15 +11,15 @@ export const ensureEmailExistsMiddleware = async (
 ): Promise<void> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  const findUserEmail = await userRepository.find({
+  const [users, count] = await userRepository.findAndCount({
     where: {
       email: req.body.email,
     },
+    withDeleted: true,
   });
 
-  if (findUserEmail.length > 0) {
+  if (count > 0) {
     throw new AppError("Email already exists", 409);
   }
-
   return next();
 };
