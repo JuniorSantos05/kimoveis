@@ -14,7 +14,7 @@ export const userSchema = z.object({
     }),
 });
 
-export const userUpdateSchema = userSchema.partial();
+export const updateUserSchema = userSchema.partial();
 
 export const returnUserSchema = userSchema
   .extend({
