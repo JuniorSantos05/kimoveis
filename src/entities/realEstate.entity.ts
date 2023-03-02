@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Address, Categories } from "./index";
+import { Address, Category } from "./index";
 
 @Entity("real_estate")
 export class RealEstate {
@@ -36,6 +36,6 @@ export class RealEstate {
   @Index({ unique: true })
   address: Address;
 
-  @ManyToOne(() => Categories)
-  category: Categories;
+  @ManyToOne(() => Category)
+  category: Category;
 }

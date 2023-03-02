@@ -27,13 +27,13 @@ export class User {
   @Column({ length: 120 })
   password: string;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @CreateDateColumn()
   createdAt: string | Date;
 
-  @UpdateDateColumn({ type: "timestamp" })
+  @UpdateDateColumn()
   updatedAt: string | Date;
 
-  @DeleteDateColumn({ type: "timestamp" })
+  @DeleteDateColumn()
   deletedAt: string | Date;
 
   @BeforeInsert()

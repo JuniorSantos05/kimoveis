@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { RealEstate, User } from "./index";
 
 @Entity("schedules_users_properties")
-export class ScheduleUserProperty {
+export class Schedule {
   @PrimaryGeneratedColumn()
   id: number;
 

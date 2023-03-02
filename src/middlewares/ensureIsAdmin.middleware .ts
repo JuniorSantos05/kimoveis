@@ -7,7 +7,7 @@ export const ensureIsAdminMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   if (!req.user.admin) {
-    throw new AppError("User is not authorized", 401);
+    throw new AppError("Insufficient permission", 403);
   }
   return next();
 };
