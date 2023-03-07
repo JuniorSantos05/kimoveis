@@ -10,7 +10,7 @@ export const returnCategorySchema = categorySchema.extend({
 });
 
 export const returnRealEstateByCategorySchema = returnCategorySchema.extend({
-  realEstate: realEstateSchemaResult.omit({address:true}).array(),
+  realEstate: realEstateSchemaResult.omit({address:true, category:true}).array(),
 });
 
 export const returnListCategorySchema = returnCategorySchema.array();

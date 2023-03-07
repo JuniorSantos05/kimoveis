@@ -7,6 +7,12 @@ import { realEstateSchema } from "../schemas/realEstate.schemas";
 
 export const realEstateRoutes: Router = Router();
 
-realEstateRoutes.post("", ensureDataIsValidMiddleware(realEstateSchema), ensureTokenIsValidMiddleware, ensureIsAdminMiddleware, createRealEstateController);
+realEstateRoutes.post(
+"",
+ensureDataIsValidMiddleware(realEstateSchema), 
+ensureTokenIsValidMiddleware, 
+ensureIsAdminMiddleware, 
+createRealEstateController
+);
 
 realEstateRoutes.get("", listRealEstateController)

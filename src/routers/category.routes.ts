@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { createCategoryController, listCategoriesAndRealEstatesController, listCategoriesController } from "../controllers/category.controllers";
-import { ensureCategoryExistsMiddleware } from "../middlewares/ensureCategoryExists.middleware";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { ensureIsAdminMiddleware } from "../middlewares/ensureIsAdmin.middleware ";
 import { ensureTokenIsValidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
@@ -13,7 +12,6 @@ categoryRoutes.post(
   ensureDataIsValidMiddleware(categorySchema),
   ensureTokenIsValidMiddleware,
   ensureIsAdminMiddleware,
-  ensureCategoryExistsMiddleware,
   createCategoryController
 );
 

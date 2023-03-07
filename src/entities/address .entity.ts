@@ -11,7 +11,7 @@ export class Address {
   @Column({ length: 8 })
   zipCode: string;
 
-  @Column({ nullable: true, type: "integer" })
+  @Column({ length: 7, nullable: true, type: "varchar" })
   number: string | null | undefined;
 
   @Column({ length: 20 })
