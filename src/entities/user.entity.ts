@@ -1,4 +1,5 @@
 import { getRounds, hashSync } from "bcryptjs";
+import { type } from "os";
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -21,19 +22,19 @@ export class User {
   @Column({ length: 45, unique: true })
   email: string;
 
-  @Column({ default: false })
-  admin: boolean;
+  @Column({ type: 'boolean', default: false })
+    admin: boolean
 
   @Column({ length: 120 })
   password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: "date"})
   createdAt: string | Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({type: "date"})
   updatedAt: string | Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({type: "date"})
   deletedAt: string | Date;
 
   @BeforeInsert()

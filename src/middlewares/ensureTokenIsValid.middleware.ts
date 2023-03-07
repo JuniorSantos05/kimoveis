@@ -3,11 +3,8 @@ import { AppError } from "../error/error";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-export const ensureTokenIsValidMiddleware = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Response | void => {
+export const ensureTokenIsValidMiddleware = (req: Request, res: Response, next: NextFunction): Response | void => {
+
   let token = req.headers.authorization;
 
   if (!token) {
@@ -25,4 +22,5 @@ export const ensureTokenIsValidMiddleware = (
 
     return next();
   });
+  
 };
