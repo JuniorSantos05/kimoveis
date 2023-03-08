@@ -4,7 +4,7 @@ import { RealEstate } from "../../entities";
 import { IListRealEstatesResult } from "../../interfaces/realEstate.interfaces";
 import { returnListRealEstateSchema } from "../../schemas/realEstate.schemas";
 
-export const listRealEstatesServices = async (): Promise<IListRealEstatesResult> => {
+export const listRealEstatesServices = async () => {
     
     const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate);
 
@@ -12,7 +12,7 @@ export const listRealEstatesServices = async (): Promise<IListRealEstatesResult>
         relations:{ address:true }
     });
 
-    const realEstates = await returnListRealEstateSchema.parse(findRealEstates);
+    //const realEstates = await returnListRealEstateSchema.parse(findRealEstates);
 
-    return realEstates;
+    return findRealEstates;
   };

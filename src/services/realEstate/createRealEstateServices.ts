@@ -2,9 +2,8 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../error/error";
-import {  IRealEstate, IRealEstateResult } from "../../interfaces/realEstate.interfaces";
-import { realEstateSchemaReturn, realEstateSchemaResult } from "../../schemas/realEstate.schemas";
-
+import { IRealEstate, IRealEstateResult } from "../../interfaces/realEstate.interfaces";
+import { realEstateSchemaResult } from "../../schemas/realEstate.schemas";
 
 export const createRealEstateServices = async (realEstateData: IRealEstate) => {
 
@@ -22,7 +21,9 @@ export const createRealEstateServices = async (realEstateData: IRealEstate) => {
       where: { zipCode: realEstateData.address.zipCode },
     });
   
-    if (addressUnique) {throw new AppError("Address already exists", 409);}
+    if (addressUnique) {
+      throw new AppError("Address already exists", 409);
+    }
     
     const newAddress = addressRepository.create(realEstateData.address);
     await addressRepository.save(newAddress);   
@@ -34,7 +35,7 @@ export const createRealEstateServices = async (realEstateData: IRealEstate) => {
     });        
     await realEstateRepository.save(realEstate);
 
-    //const newRealEstate = realEstateSchemaReturn.parse(realEstate); 
+    //const newRealEstate = realEstateSchemaResult.parse(realEstate); 
   
     return realEstate;
   };

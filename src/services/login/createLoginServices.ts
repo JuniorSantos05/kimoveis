@@ -18,7 +18,7 @@ export const createLoginServices = async (loginData: ILogin): Promise<string> =>
     throw new AppError("Invalid credentials", 401);
   }
 
-  const passwordMatch = compare(loginData.password, user.password);
+  const passwordMatch = await compare(loginData.password, user.password);
 
   if (!passwordMatch) {
     throw new AppError("Invalid credentials", 401);

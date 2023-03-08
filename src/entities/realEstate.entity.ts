@@ -1,4 +1,4 @@
-import { Address, Category } from "./index";
+import { Address, Category, Schedule } from "./index";
 import {
   Column,
   CreateDateColumn,
@@ -6,6 +6,7 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -36,6 +37,10 @@ export class RealEstate {
   @Index({ unique: true })
   address: Address;
 
+  @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
+  schedules: Schedule[];
+
   @ManyToOne(() => Category, { onDelete: 'SET NULL', nullable:true })
   category: Category | null | undefined;
+
 }
