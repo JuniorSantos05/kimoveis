@@ -6,15 +6,12 @@ import { User } from "../../entities";
 import { AppError } from "../../error/error";
 import { ILogin } from "../../interfaces/login.interfaces";
 
-export const createLoginServices = async (
-  loginData: ILogin
-): Promise<string> => {
+export const createLoginServices = async (loginData: ILogin): Promise<string> => {
+
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const user: User | null = await userRepository.findOne({
-    where: {
-      email: loginData.email,
-    },
+    where: { email: loginData.email },
   });
 
   if (!user) {

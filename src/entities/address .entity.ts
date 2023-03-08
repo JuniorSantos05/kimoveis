@@ -1,4 +1,4 @@
-import { AfterLoad, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("addresses")
 export class Address {
@@ -11,17 +11,13 @@ export class Address {
   @Column({ length: 8 })
   zipCode: string;
 
-  @Column({ length: 6, nullable: true })
-  number: string;
+  @Column({ nullable: true, type: "integer" })
+  number: string | null | undefined;
 
   @Column({ length: 20 })
   city: string;
 
   @Column({ length: 2 })
   state: string;
-
-  @AfterLoad()
-  upperCaseFields() {
-    this.state = this.state.toUpperCase();
-  }
+ 
 }

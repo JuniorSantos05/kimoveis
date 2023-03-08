@@ -4,10 +4,10 @@ import { User } from "../../entities";
 import { IUser, IUserReturn } from "../../interfaces/users.interfaces";
 import { returnUserSchema } from "../../schemas/users.schemas";
 
-export const createUserServices = async (
-  userData: IUser
-): Promise<IUserReturn> => {
+export const createUserServices = async (userData: IUser): Promise<IUserReturn> => {
+
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
   const user = userRepository.create(userData);
 
   await userRepository.save(user);

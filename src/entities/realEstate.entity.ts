@@ -1,3 +1,4 @@
+import { Address, Category } from "./index";
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +10,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Address, Categories } from "./index";
 
 @Entity("real_estate")
 export class RealEstate {
@@ -25,17 +25,17 @@ export class RealEstate {
   @Column({ type: "integer" })
   size: number;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @CreateDateColumn({type: "date"})
   createdAt: string | Date;
 
-  @UpdateDateColumn({ type: "timestamp" })
+  @UpdateDateColumn({type: "date"})
   updatedAt: string | Date;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, { cascade: true })
   @JoinColumn()
   @Index({ unique: true })
   address: Address;
 
-  @ManyToOne(() => Categories)
-  category: Categories;
+  @ManyToOne(() => Category, { onDelete: 'SET NULL', nullable:true })
+  category: Category | null | undefined;
 }
