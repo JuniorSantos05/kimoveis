@@ -5,7 +5,7 @@ import { AppError } from "../../error/error";
 import { IRealEstate, IRealEstateResult } from "../../interfaces/realEstate.interfaces";
 import { realEstateSchemaResult } from "../../schemas/realEstate.schemas";
 
-export const createRealEstateServices = async (realEstateData: IRealEstate): Promise<IRealEstateResult> => {
+export const createRealEstateServices = async (realEstateData: IRealEstate) => {
 
     const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate);
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
@@ -35,8 +35,8 @@ export const createRealEstateServices = async (realEstateData: IRealEstate): Pro
     });        
     await realEstateRepository.save(realEstate);
 
-    const newRealEstate = realEstateSchemaResult.parse(realEstate); 
+    //const newRealEstate = realEstateSchemaResult.parse(realEstate); 
   
-    return newRealEstate;
+    return realEstate;
   };
   
