@@ -6,7 +6,7 @@ import { User } from "../../entities";
 import { AppError } from "../../error/error";
 import { ILogin } from "../../interfaces/login.interfaces";
 
-export const createLoginServices = async (loginData: ILogin): Promise<string> => {
+export const createLoginServices = async (loginData: ILogin) => {
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 

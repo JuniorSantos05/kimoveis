@@ -5,7 +5,6 @@ import { ensureIsAdminMiddleware } from "../middlewares/ensureIsAdmin.middleware
 import { ensureTokenIsValidMiddleware } from "../middlewares/ensureTokenIsValid.middleware";
 import { scheduleSchema } from "../schemas/schedules.schema";
 
-
 export const schedulesRoutes: Router = Router();
 
 schedulesRoutes.post(
