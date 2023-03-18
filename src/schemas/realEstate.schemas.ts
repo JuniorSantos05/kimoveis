@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { addressSchema } from "./address.schema";
-import { returnCategorySchema } from "./category.schemas";
 
 export const realEstateSchema = z.object({
     value: z.number().or(z.string()),
@@ -10,11 +9,13 @@ export const realEstateSchema = z.object({
 
 })
 
-const addressSchemaResult = addressSchema.extend({ id: z.number() })
-
 export const realEstateSchemaResult = z.object({
+    id: z.number(),
+    sold: z.boolean().default(false),
     value: z.string(),
     size: z.number(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
     address: z.object({
       id: z.number(),
       street: z.string(),
@@ -26,14 +27,9 @@ export const realEstateSchemaResult = z.object({
     category: z.object({
       id: z.number(),
       name: z.string().min(3).max(45),
-    }),
-    sold: z.boolean().default(false),
-    id: z.number(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
+    }),    
   });
 
-export const returnListRealEstateSchema = realEstateSchemaResult.array();
 
 
 

@@ -1,8 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { RealEstate, Schedule } from "../../entities";
+import { RealEstate } from "../../entities";
 import { AppError } from "../../error/error";
-import { IScheduleRealEstateResult } from "../../interfaces/schedules.interfaces";
 
 
 export const listSchedulesRealEstatesServices = async ( realEstateId: number) => {
@@ -24,8 +23,6 @@ export const listSchedulesRealEstatesServices = async ( realEstateId: number) =>
     .leftJoinAndSelect("schedules.user", "user")
     .where("realEstate.id = :realEstateId", { realEstateId })
     .getOne();
-
-    //const listSchedules = scheduleListSchema.parse(schedules)
 
     return schedules
 

@@ -2,8 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, Category, RealEstate } from "../../entities";
 import { AppError } from "../../error/error";
-import { IRealEstate, IRealEstateResult } from "../../interfaces/realEstate.interfaces";
-import { realEstateSchemaResult } from "../../schemas/realEstate.schemas";
+import { IRealEstate } from "../../interfaces/realEstate.interfaces";
 
 export const createRealEstateServices = async (realEstateData: IRealEstate) => {
 
@@ -35,8 +34,6 @@ export const createRealEstateServices = async (realEstateData: IRealEstate) => {
     });        
     await realEstateRepository.save(realEstate);
 
-    //const newRealEstate = realEstateSchemaResult.parse(realEstate); 
-  
     return realEstate;
   };
   
